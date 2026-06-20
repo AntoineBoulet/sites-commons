@@ -11,3 +11,4 @@ format:
         - brand
     css: 
       - system/styles/theme.css
+    toc: true
