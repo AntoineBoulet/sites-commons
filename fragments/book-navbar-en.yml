@@ -1,0 +1,16 @@
+# source: antoineboulet.github.io/_quarto-en.yml
+website:
+  navbar:
+    left:
+      - text: research
+        menu: 
+          - text: overview & highlights
+            href: https://antoineboulet.github.io/en/content/research/overview-highlights.html
+          - text: publications & preprints
+            href: https://antoineboulet.github.io/en/content/research/publications-preprints.html
+          - text: talks & lectures
+            href: https://antoineboulet.github.io/en/content/research/talks-lectures.html
+          - text: code & tools
+            href: https://antoineboulet.github.io/en/content/research/code-tools.html
+      - text: teaching
+        href: https://antoineboulet.github.io/en/content/teaching/index.html

@@ -1,0 +1,8 @@
+# source: antoineboulet.github.io/_quarto-fr.yml
+website:
+  navbar:
+    left:
+      - text: recherche
+        href: https://antoineboulet.github.io/fr/content/recherche/index.html
+      - text: enseignement
+        href: https://antoineboulet.github.io/fr/content/enseignement/index.html
