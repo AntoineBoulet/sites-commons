@@ -1,6 +1,5 @@
 website:
   title: "Antoine Boulet"
-  favicon: system/favicon.svg
   search: 
     location: navbar
   open-graph: true

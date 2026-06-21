@@ -1,0 +1,5 @@
+format:
+  html:
+    include-in-header:
+      - system/scripts/mathjax-config-portfolio.html
+    

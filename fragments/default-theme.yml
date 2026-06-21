@@ -9,6 +9,4 @@ format:
       dark: 
         - darkly
         - brand
-    css: 
-      - system/styles/theme.css
     toc: true

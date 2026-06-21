@@ -1,0 +1,4 @@
+format:
+  html:
+    css: 
+      - system/styles/common-custom-theme.css
