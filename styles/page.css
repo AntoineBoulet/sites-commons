@@ -14,13 +14,35 @@ footer,
   font-family: "IBM Plex Sans", sans-serif;
 }
 
-.quarto-title-block,
-.quarto-title .title {
+.quarto-title-block
+{
   font-family: "IBM Plex Sans", sans-serif;
 }
 
+.quarto-title .title {
+  font-family: "STIX Two Text", sans-serif;
+}
+
 .navbar,
-.quarto-sidebar,
+.sidebar, /*.quarto-sidebar*/
 #TOC {
   font-family: "IBM Plex Sans", sans-serif;
+}
+
+.nav-page a {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+
+
+
+#title-block-header .quarto-title .title
+{
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+#title-block-header .quarto-title .title .chapter-title, 
+#title-block-header .quarto-title .title .chapter-number
+{
+    font-family: "STIX Two Text", sans-serif;
 }
