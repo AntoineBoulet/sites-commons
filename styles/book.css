@@ -5,7 +5,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "STIX Two Text", sans-serif;
+  font-family: "STIX Two Text", serif;
 }
 
 footer,
@@ -20,7 +20,7 @@ footer,
 }
 
 .quarto-title .title {
-  font-family: "STIX Two Text", sans-serif;
+  font-family: "STIX Two Text", serif;
 }
 
 .navbar,
@@ -44,5 +44,5 @@ footer,
 #title-block-header .quarto-title .title .chapter-title, 
 #title-block-header .quarto-title .title .chapter-number
 {
-    font-family: "STIX Two Text", sans-serif;
+    font-family: "STIX Two Text", serif;
 }
