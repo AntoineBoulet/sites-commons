@@ -80,7 +80,7 @@ footer {
     }
 }
 
-.tagline-en {
+.tagline {
     font-size: 1rem;
     font-style: italic;
     opacity: 0;
@@ -88,15 +88,7 @@ footer {
     margin: 0.5rem 0 0.25rem;
 }
 
-.tagline-fr {
-    font-size: 0.85rem;
-    color: #888;
-    font-style: italic;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
 
-.tagline-en.visible,
-.tagline-fr.visible {
+.tagline.visible {
     opacity: 1;
 }

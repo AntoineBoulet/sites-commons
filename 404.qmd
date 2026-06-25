@@ -75,12 +75,7 @@ css: styles/404.css
 
   </div>
 
-  <p class="tagline-en" id="f404-tagline-en">
-    This page was not found at any order in perturbation theory.
-  </p>
-  <p class="tagline-fr" id="f404-tagline-fr">
-    Cette page est introuvable à tout ordre en théorie des perturbations.
-  </p>
+  <p class="tagline" id="f404-tagline"></p>
 
 </div>
 
@@ -113,12 +108,13 @@ css: styles/404.css
   setTimeout(function () {
     lbl.style.opacity = '0';
     setTimeout(function () { lbl.style.visibility = 'hidden'; }, 400);
-    document.getElementById('f404-tagline-en').classList.add('visible');
+    var isFr = document.documentElement.lang.startsWith('fr');
+    var tagline = document.getElementById('f404-tagline');
+    tagline.textContent = isFr
+      ? "Cette page est introuvable à tout ordre en théorie des perturbations."
+      : "This page was not found at any order in perturbation theory.";
+    tagline.classList.add('visible');
   }, 4000);
-
-  setTimeout(function () {
-    document.getElementById('f404-tagline-fr').classList.add('visible');
-  }, 4500);
 })();
 </script>
 ```
