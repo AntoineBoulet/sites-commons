@@ -17,6 +17,7 @@ Deux `_quarto.yml` séparés, un par langue.
 # _quarto.yml (version EN)
 metadata-files:
   - system/fragments/default.yml
+  - system/fragments/portfolio.yml
   - system/fragments/lang-en.yml
 ```
 
@@ -24,6 +25,7 @@ metadata-files:
 # _quarto.yml (version FR)
 metadata-files:
   - system/fragments/default.yml
+  - system/fragments/portfolio.yml
   - system/fragments/lang-fr.yml
 ```
 

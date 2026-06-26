@@ -56,8 +56,9 @@ for %%M in (light dark) do (
     echo.
     echo === Variante %%M : %SRC% ===
 
-    rem --- assemblage : preambule + figure + fin de document ---
+    rem --- assemblage : preambule + début de document + figure + fin de document ---
     if /i "%%M"=="light" (set "PREAMBLE=%PREAMBLE_LIGHT%") else (set "PREAMBLE=%PREAMBLE_DARK%")
+    echo \begin{document}>> "%SRCDIR%\_tmp-%SRCNAME%-%%M.tex"
     copy /b /y "!PREAMBLE!" + "%SRC%" "%SRCDIR%\_tmp-%SRCNAME%-%%M.tex" >nul
     echo \end{document}>> "%SRCDIR%\_tmp-%SRCNAME%-%%M.tex"
 
