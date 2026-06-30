@@ -44,11 +44,11 @@
 const params = (typeof templateParams !== "undefined") ? templateParams : {};
 const LANG = params.lang || "en";
 const GROUP_ID = params.id || "accordion";
- 
+
 /* =====================================================================
    HELPERS
    ===================================================================== */
- 
+
 /** Résout un champ multilingue { en, fr } pour la langue de la page. */
 let t = (field) => {
   if (field == null) return field;
@@ -57,28 +57,93 @@ let t = (field) => {
   }
   return field;
 };
- 
+
 /** Échappe les caractères HTML spéciaux (&, <, >) avant toute insertion ;
- *  appelé par mdInline() avant d'y réinjecter les balises <strong>/<em>. */
+ *  appelé par mdInline() avant d'y réinjecter les balises <strong>/<em>/<a>. */
 let escapeHtml = (str) => String(str)
   .replace(/&/g, "&amp;")
   .replace(/</g, "&lt;")
   .replace(/>/g, "&gt;");
- 
-/** Gras/italique Markdown -> HTML, sur du texte déjà échappé. */
+
+/** Gras/italique/liens Markdown -> HTML, sur du texte déjà échappé. */
 let mdInline = (text) => {
   let safe = escapeHtml(text);
+  safe = safe.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
   safe = safe.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   safe = safe.replace(/\*(.+?)\*/g, "<em>$1</em>");
   return safe;
 };
- 
-/** Texte multi-paragraphes (séparés par une ligne vide) -> HTML. */
-let mdBlock = (text) => {
-  let paragraphs = String(text).trim().split(/\n\s*\n/);
-  return paragraphs.map(p => `<p>${mdInline(p.trim())}</p>`).join("\n");
+
+/** Détecte si une ligne est un item de liste à puces (-, *, +) ou numérotée (1.). */
+let parseListItem = (line) => {
+  let bulletMatch = line.match(/^\s*[-*+]\s+(.*)$/);
+  if (bulletMatch) return { type: "ul", content: bulletMatch[1] };
+
+  let orderedMatch = line.match(/^\s*\d+[.)]\s+(.*)$/);
+  if (orderedMatch) return { type: "ol", content: orderedMatch[1] };
+
+  return null;
 };
- 
+
+/** Une ligne démarre-t-elle un nouveau "bloc label" du type "**Label :** texte"
+ *  ou "[1] Référence..." ? */
+let startsNewParagraph = (line) => {
+  return /^\s*(\*\*[^*]+\*\*|\[\d+\])/.test(line);
+};
+
+/** Texte multi-paragraphes + listes + liens (markdown léger) -> HTML. */
+let mdBlock = (text) => {
+  let lines = String(text).trim().split("\n");
+  let htmlParts = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    let line = lines[i];
+
+    if (line.trim() === "") {
+      i++;
+      continue;
+    }
+
+    let listItem = parseListItem(line);
+
+    if (listItem) {
+      let listType = listItem.type;
+      let items = [];
+
+      while (i < lines.length) {
+        let current = parseListItem(lines[i]);
+        if (!current || current.type !== listType) break;
+        items.push(current.content);
+        i++;
+      }
+
+      let tag = listType;
+      let liHtml = items.map(item => `<li>${mdInline(item.trim())}</li>`).join("\n");
+      htmlParts.push(`<${tag}>\n${liHtml}\n</${tag}>`);
+
+    } else {
+      let paraLines = [line];
+      i++;
+
+      while (
+        i < lines.length &&
+        lines[i].trim() !== "" &&
+        !parseListItem(lines[i]) &&
+        !startsNewParagraph(lines[i])
+      ) {
+        paraLines.push(lines[i]);
+        i++;
+      }
+
+      let paraText = paraLines.join(" ").trim();
+      htmlParts.push(`<p>${mdInline(paraText)}</p>`);
+    }
+  }
+
+  return htmlParts.join("\n");
+};
+
 %>
  
 <div class="accordion quarto-accordion" id="<%= GROUP_ID %>">
